@@ -243,6 +243,16 @@ function makeCorsRequest() {
 }
 
 
+function getCategories() {
+    $.get("https://api.github.com/repos/nybles/nybles.github.io/content/category",
+          function (data) {
+              var categoryList = [];
+              for (var cat in data)
+                  categoryList.push(cat.name);
+          },
+          "json");
+}
+
 
 window.onload = function() {
     // document.getElementById('submitBtn').onclick = makeCorsRequest;
