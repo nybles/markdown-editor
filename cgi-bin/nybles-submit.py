@@ -2,12 +2,12 @@
 
 import cgi, cgitb
 import json
+import os
 from sys import exit
 
 cgitb.enable() # for debugging
 
-SHARE_CAP = 10737418240 # 10 GB
-USER_DB = "21lane_db.json"
+target_directory = "nybles-submissions"
 
 form = cgi.FieldStorage()
 
@@ -29,6 +29,23 @@ if ( (not response["title"]) or
 
 
 # everything's fine
-print ("Content-type: application/json")
+filename = response["author"] + '-' + response["title"] + ".md"
+target = os.path.join(target_directory, filename)
+with open (os.path.join(os.getcwd(), target), 'w') as f:
+    f.write(json.dumps(response, indent=4))
+
+
+print ("Content-type: text/html")
 print ()
-print (json.dumps(response, indent=4))
+
+print ("""
+<html>
+<body>
+Response received.
+Redirecting...
+<script>
+document.location = "https://nybles.github.io/"
+</script>
+</body>
+</html>
+""")
