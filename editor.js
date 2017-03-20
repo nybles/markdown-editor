@@ -185,9 +185,8 @@ if(window.location.hash){
     editor.focus();
 }
 
-inElem.style.height = document.getElementById('code').innerText.split('\n').length * window.getComputedStyle(inElem).getPropertyValue("line-height").replace('px', '')*1.5 + 50 +'px';
 
-
+// below two functions about xhr are not used as of now
 // Create the XHR object.
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
@@ -294,4 +293,5 @@ window.onload = function() {
     outtoggle.addEventListener("click", function() {
         toggleView(intoggle.checked, outtoggle.checked);
     });
+    inElem.style.height = document.getElementById('code').innerText.split('\n').length * window.getComputedStyle(inElem).getPropertyValue("line-height").replace('px', '')*1.5 + 50 +'px';
 };
