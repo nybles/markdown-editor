@@ -5,44 +5,47 @@ import json
 import os
 from sys import exit
 
-cgitb.enable() # for debugging
+# for debugging
+cgitb.enable()
 
-target_directory = "nybles-submissions"
+target_directory = "/nybles-submissions"
 
 form = cgi.FieldStorage()
-
 try:
-    response = {
-        "title": form.getvalue("title"),
-        "author": form.getvalue("author"),
-        "categories": list(map(lambda cat: cat.strip(),
-                               form.getvalue("categories").split(","))),
-        "content": form.getvalue("content")
-    }
+    if ((not form.getvalue("title")) or
+        (not form.getvalue("author")) or
+        (not form.getvalue("categories")) or
+        (not form.getvalue("content"))):
+        raise AttributeError
 except AttributeError:
-    print ("Content-type: text/plain")
-    print ()
-    print ("Incomplete submission")
-
-
-# the form has been submitted, verify it
-if ( (not response["title"]) or
-     (not response["author"]) or
-     (not response["categories"]) or
-     (not response["content"]) ):
     print ("Content-type: text/plain")
     print ()
     print ("Incomplete submission")
     exit(0)
 
 
-# everything's fine
-filename = response["author"] + '-' + response["title"] + ".md"
-target = os.path.join(target_directory, filename)
-with open (os.path.join(os.getcwd(), target), 'w') as f:
-    f.write(json.dumps(response, indent=4))
+try:
+    response = {
+        "title": form.getvalue("title"),
+        "author": form.getvalue("author"),
+        "categories": list(map(lambda cat: cat.strip(),
+                            form.getvalue("categories").split(","))),
+        "content": form.getvalue("content")
+    }
+
+    # form submitted
+    filename = response["author"] + '-' + response["title"] + ".md"
+    target = os.path.join(target_directory, filename)
+    with open(target), 'w') as f:
+        f.write(json.dumps(response, indent=4))
+except Exception as e:
+    print ("Content-type: text/plain")
+    print ()
+    print ("Some error occured. Please try again later")
+    exit(1)
 
 
+# everything went fine
 print ("Content-type: text/html")
 print ()
 
