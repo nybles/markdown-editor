@@ -104,7 +104,8 @@
             <div class="container">
                 <div id="in" class="col-md-6 col-sm-12 col-xs-12">
                     <textarea id="code" name="content" required >
-# (GitHub-Flavored) Markdown Editor
+# Editor
+![Nybles logo](https://nybles.github.io/static/logo/Logo_2_transparent.png)
 
 Basic useful feature list:
 
@@ -113,8 +114,27 @@ Basic useful feature list:
 * Drag and drop a file into here to load it
 * File contents are saved in the URL so you can share files
 
+## Post Layout
 
-I'm no good at writing sample / filler text, so go write something yourself.
+	---
+	layout: Post
+	title: Add your title
+	author: Author name
+	categories: Only three categories are now : future, trending and campus
+	intro: Will be shown in the main page if specified
+	---
+
+	content should be added here,No need to add title name again.
+    
+Categories avaliable : campus,trending and future
+
+Rename the file as `YYYY-MM-DD-name-of-post.md`
+
+## Example Posts
+- [Post one](https://raw.githubusercontent.com/nybles/nybles.github.io/master/_posts/2017-03-12-the-great-aiwakening.md)
+- [Post two](https://raw.githubusercontent.com/nybles/nybles.github.io/master/_posts/2017-03-19-a-chat-with-aditya-chaturvedi.md)
+
+### Some markdown tips
 
 Look, a list!
 
@@ -130,18 +150,8 @@ $('div').html('I am a div.');
 });
 ```
 
-This is [on GitHub](https://github.com/jbt/markdown-editor) so let me know if I've b0rked it somewhere.
-
-
-Props to Mr. Doob and his [code editor](http://mrdoob.com/projects/code-editor/), from which
-the inspiration to this, and some handy implementation hints, came.
-
-### Stuff used to make this:
-
-* [markdown-it](https://github.com/markdown-it/markdown-it) for Markdown parsing
-* [CodeMirror](http://codemirror.net/) for the awesome syntax-highlighted editor
-* [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for syntax highlighting in output code blocks
-* [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
+[Writing in Markdown](https://guides.github.com/features/mastering-markdown/) for more.
+  
                     </textarea>
                 </div>
                 <div id="out" class="col-md-6 col-sm-12 col-xs-12"></div>
