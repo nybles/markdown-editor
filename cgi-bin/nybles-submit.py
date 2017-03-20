@@ -36,7 +36,7 @@ try:
     # form submitted
     filename = response["author"] + '-' + response["title"] + ".md"
     target = os.path.join(target_directory, filename)
-    with open(target), 'w') as f:
+    with open(target, 'w') as f:
         f.write(json.dumps(response, indent=4))
 except Exception as e:
     print ("Content-type: text/plain")
