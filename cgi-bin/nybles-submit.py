@@ -11,13 +11,21 @@ target_directory = "nybles-submissions"
 
 form = cgi.FieldStorage()
 
-response = {
-    "title": form.getvalue("title"),
-    "author": form.getvalue("author"),
-    "categories": list( map(lambda cat : cat.strip() ,form.getvalue("categories").split(",")) ),
-    "content": form.getvalue("content")
-}
+try:
+    response = {
+        "title": form.getvalue("title"),
+        "author": form.getvalue("author"),
+        "categories": list(map(lambda cat: cat.strip(),
+                               form.getvalue("categories").split(","))),
+        "content": form.getvalue("content")
+    }
+except AttributeError:
+    print ("Content-type: text/plain")
+    print ()
+    print ("Incomplete submission")
 
+
+# the form has been submitted, verify it
 if ( (not response["title"]) or
      (not response["author"]) or
      (not response["categories"]) or
