@@ -29,7 +29,8 @@ var hashto;
 var inElem = document.getElementById("in");
 
 function update(e){
-    inElem.style.height = document.getElementById('code').innerText.split('\n').length * window.getComputedStyle(inElem).getPropertyValue("line-height").replace('px', '')*1.5 + 50 +'px';
+   
+
     setOutput(e.getValue());
 
     // clearTimeout(hashto);
@@ -58,6 +59,7 @@ function setOutput(val){
             return;
         }
     }
+
     inElem.style.height = inElem.innerText.split('\n').length * window.getComputedStyle(inElem).getPropertyValue("line-height").replace('px', '')*1.5 + 50 +'px';
 }
 
